@@ -7,3 +7,15 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+.flash-message {
+    bottom: 20px;
+    height: auto;
+    position: fixed;
+    right: 20px;
+    width: 250px;
+
+    .alert {
+        margin: 0;
+    }
+}

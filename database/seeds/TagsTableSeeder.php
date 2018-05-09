@@ -16,3 +16,4 @@ class TagsTableSeeder extends Seeder
         });
     }
 }
+

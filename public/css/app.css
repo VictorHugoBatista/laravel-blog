@@ -8350,3 +8350,15 @@ button.close {
   }
 }
 
+.flash-message {
+  bottom: 20px;
+  height: auto;
+  position: fixed;
+  right: 20px;
+  width: 250px;
+}
+
+.flash-message .alert {
+  margin: 0;
+}
+
