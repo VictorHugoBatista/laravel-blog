@@ -62,6 +62,9 @@ class PostController extends Controller
 
         auth()->user()->publish(new Post(request(['title', 'content'])));
         
+        session()->flash('flash-type', 'success');
+        session()->flash('flash-message', 'O post <strong>' . request('title') . '</strong> foi salvo com sucesso!');
+
         return redirect('posts');
     }
 
