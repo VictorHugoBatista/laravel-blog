@@ -86,11 +86,13 @@
             </div>
         </div>
 
+        @if(session('flash-type') && session('flash-message'))
         <div id="flash-message" class="flash-message">
-            <div class="alert alert-success">
-                O post <strong>Lorem ipsum dolor sit amet</strong> foi salvo com sucesso!
+            <div class="alert alert-{{ session('flash-type') }}">
+                {!! session('flash-message') !!}
             </div>
         </div>
+        @endif
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
