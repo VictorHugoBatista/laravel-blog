@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        <div class="flash-message">
+        <div id="flash-message" class="flash-message">
             <div class="alert alert-success">
                 O post <strong>Lorem ipsum dolor sit amet</strong> foi salvo com sucesso!
             </div>

@@ -963,13 +963,16 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
-module.exports = __webpack_require__(42);
+module.exports = __webpack_require__(43);
 
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__flash_message__ = __webpack_require__(38);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -981,17 +984,21 @@ __webpack_require__(11);
 
 window.Vue = __webpack_require__(35);
 
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(38));
+Vue.component('example-component', __webpack_require__(39));
 
 var app = new Vue({
   el: '#app'
 });
+
+__WEBPACK_IMPORTED_MODULE_0__flash_message__["a" /* default */].initialize();
 
 /***/ }),
 /* 11 */
@@ -43069,14 +43076,51 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 /* 38 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    data: {
+        fadeOutTime: 4000,
+        fadeOutAnimationTime: 220
+    },
+    elements: {
+        $flashMessage: null
+    },
+    initialize: function initialize() {
+        if (this.initializeElements()) {
+            this.initializeBehavior();
+        }
+    },
+    initializeElements: function initializeElements() {
+        var $flashMessage = $('#flash-message');
+        if (!$flashMessage.length) {
+            return false;
+        }
+        this.elements = {
+            $flashMessage: $flashMessage
+        };
+        return true;
+    },
+    initializeBehavior: function initializeBehavior() {
+        var _this = this;
+
+        setTimeout(function () {
+            _this.elements.$flashMessage.fadeOut(_this.data.fadeOutAnimationTime);
+        }, this.data.fadeOutTime);
+    }
+});
+
+/***/ }),
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(39)
+var normalizeComponent = __webpack_require__(40)
 /* script */
-var __vue_script__ = __webpack_require__(40)
+var __vue_script__ = __webpack_require__(41)
 /* template */
-var __vue_template__ = __webpack_require__(41)
+var __vue_template__ = __webpack_require__(42)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -43115,7 +43159,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -43224,7 +43268,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43253,7 +43297,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -43296,7 +43340,7 @@ if (false) {
 }
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
