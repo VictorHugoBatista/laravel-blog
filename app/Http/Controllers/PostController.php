@@ -77,7 +77,7 @@ class PostController extends Controller
     public function show($id)
     {
         return view('posts.show', [
-            'post' => Post::with('tags')->find($id),
+            'post' => Post::with(['comments', 'tags'])->find($id),
         ]);
     }
 

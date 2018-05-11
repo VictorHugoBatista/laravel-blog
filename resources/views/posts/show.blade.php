@@ -3,9 +3,9 @@
 @section('content')
 <div class="media">
     <div class="media-body">
-        <h4 class="media-heading">
+        <h2 class="media-heading">
             {{ $post->title }}
-        </h4>
+        </h2>
         <div>
             By <strong>{{ $post->user->name }}</strong> at
             <strong>{{ $post->created_at->format('H:i - d/m/Y') }}</strong>
@@ -21,6 +21,19 @@
                 <li>{{ $tag->title }}</li>
                 @endforeach
             </ul>
+        </div>
+        @endif
+        <hr />
+        @if($post->comments && 0 < count($post->comments))
+        <div>
+            @foreach ($post->comments as $comment)
+            <div>
+                <h3>{{ $comment->subject }}</h3>
+                <p>
+                    {{ $comment->body }}
+                </p>
+            </div>
+            @endforeach
         </div>
         @endif
     </div>
