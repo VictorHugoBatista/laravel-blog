@@ -2,6 +2,7 @@
 
 namespace App;
 
+use \App\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -23,6 +24,11 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function addComment(Comment $comment)
+    {
+        $this->comments()->save($comment);
     }
 
     public static function archive()
