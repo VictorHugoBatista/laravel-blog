@@ -24,18 +24,21 @@
         </div>
         @endif
         <hr />
-        @if($post->comments && 0 < count($post->comments))
         <div>
-            @foreach ($post->comments as $comment)
+            @if($post->comments && 0 < count($post->comments))
             <div>
-                <h3>{{ $comment->subject }}</h3>
-                <p>
-                    {{ $comment->body }}
-                </p>
+                @foreach ($post->comments as $comment)
+                <div>
+                    <h3>{{ $comment->subject }}</h3>
+                    <p>
+                        {{ $comment->body }}
+                    </p>
+                </div>
+                @endforeach
             </div>
-            @endforeach
+            @endif
+            @include('comments.create')
         </div>
-        @endif
     </div>
 </div>
 @endsection
