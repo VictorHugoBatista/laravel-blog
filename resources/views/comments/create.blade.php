@@ -1,5 +1,5 @@
 <div>
-    <form action="/comments" type="POST">
+    <form action="/comments/{{ $post->id }}" method="POST">
         {{ csrf_field() }}
 
         <div class="form-group">
