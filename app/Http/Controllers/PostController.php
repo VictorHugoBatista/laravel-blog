@@ -119,6 +119,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $postToExclude = Post::find($id);
+        $postTitle = $postToExclude->title;
+
+        $postToExclude->delete();
+
+        session()->flash('flash-type', 'success');
+        session()->flash('flash-message', 'O post <strong>' . request('title') . '</strong> foi excluído com sucesso!');
+
+        return back();
     }
 }

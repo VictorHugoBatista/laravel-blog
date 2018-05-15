@@ -27,7 +27,11 @@
                         @endif
                     </div>
                     <div class="col-md-4">
-                        <button class="btn btn-danger btn-block">Delete post</button>
+                        <form action="/posts/{{$post->id}}" method="POST">
+                            {{ csrf_field() }}
+                            {{ method_field('delete') }}
+                            <button class="btn btn-danger btn-block">Delete post</button>
+                        </form>
                     </div>
                 </div>
             </div>
