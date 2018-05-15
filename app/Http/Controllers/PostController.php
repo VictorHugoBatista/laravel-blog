@@ -37,6 +37,13 @@ class PostController extends Controller
         ]);
     }
 
+    public function myPosts()
+    {
+        return view('posts.my-posts', [
+            'posts' => auth()->user()->posts,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
