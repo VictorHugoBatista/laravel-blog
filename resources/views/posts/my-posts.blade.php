@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="row">
+    @if(isset($posts))
     @foreach ($posts as $post)
     <div class="col-md-6">
         <div class="media">
@@ -33,5 +34,15 @@
         </div>
     </div>
     @endforeach
+    @else
+    <div class="col-md-12">
+        <div class="alert alert-danger text-center">
+            <b>
+                You have not created any posts.
+                Create a post <a href="/posts/create">here</a>
+            </b>
+        </div>
+    </div>
+    @endif
 </div>
 @endsection
