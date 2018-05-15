@@ -1,33 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-@foreach ($posts as $post)
-<div class="media">
-    <div class="media-body">
-        <a href="/posts/{{ $post->id }}">
-            <h4 class="media-heading">
-                {{ $post->title }}
-            </h4>
-            <div>
-                By <strong>{{ $post->user->name }}</strong> at
-                <strong>{{ $post->created_at->format('H:i - d/m/Y') }}</strong>
+<div class="row">
+    @foreach ($posts as $post)
+    <div class="col-md-6">
+        <div class="media">
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="media-heading">
+                            {{ $post->title }}
+                        </h4>
+                        <div>
+                            Date: <strong>{{ $post->created_at->format('H:i - d/m/Y') }}</strong>
+                        </div>
+                        @if($post->tags && 0 < count($post->tags))
+                        <div>
+                            Tags:
+                            <ul>
+                                @foreach ($post->tags as $tag)
+                                <li>{{ $tag->title }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-danger btn-block">Delete post</button>
+                    </div>
+                </div>
             </div>
-            <div>
-                {{ $post->content }}
-            </div>
-            @if($post->tags && 0 < count($post->tags))
-            <div>
-                Tags:
-                <ul>
-                    @foreach ($post->tags as $tag)
-                    <li>{{ $tag->title }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-        </a>
+        </div>
     </div>
-    <hr />
+    @endforeach
 </div>
-@endforeach
 @endsection
