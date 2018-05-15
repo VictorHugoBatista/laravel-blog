@@ -56,6 +56,9 @@
                                             <a href="/posts/create">Create post</a>
                                         </li>
                                         <li>
+                                            <a href="/my-posts">My posts</a>
+                                        </li>
+                                        <li>
                                             <a href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
