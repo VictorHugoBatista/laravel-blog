@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
 use App\Post;
 
@@ -120,8 +121,15 @@ class PostController extends Controller
     public function destroy($id)
     {
         $postToExclude = Post::find($id);
-        $postTitle = $postToExclude->title;
 
+        if (Gate::denies('update-post', $postToExclude)) {
+            session()->flash('flash-type', 'danger');
+            session()->flash('flash-message', 'Você apenas pode alterar ou excluir seus próprios posts!');
+
+            return back();
+        }
+
+        $postTitle = $postToExclude->title;
         $postToExclude->delete();
 
         session()->flash('flash-type', 'success');
