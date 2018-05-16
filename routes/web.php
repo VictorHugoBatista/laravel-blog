@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', 'PostController@index');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/', 'PostController@index');
 Route::resource('/posts', 'PostController');
+Route::get('/my-posts', 'PostController@myPosts');
 
 Route::get('/tags/{tag}', 'TagController@index');
 
