@@ -105,7 +105,7 @@ class PostController extends Controller
             return back();
         }
 
-        dd(User::find($id));
+        return view('posts.edit');
     }
 
     /**
