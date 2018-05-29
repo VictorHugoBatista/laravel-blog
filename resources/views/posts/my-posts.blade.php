@@ -27,7 +27,8 @@
                         @endif
                     </div>
                     <div class="col-md-4">
-                        <form action="/posts/{{$post->id}}" method="POST">
+                        <a class="btn btn-primary btn-block" href="/posts/{{ $post->id }}/edit">Update post</a>
+                        <form action="/posts/{{ $post->id }}" method="POST">
                             {{ csrf_field() }}
                             {{ method_field('delete') }}
                             <button class="btn btn-danger btn-block">Delete post</button>
