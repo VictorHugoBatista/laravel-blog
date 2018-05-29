@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
+use App\User;
 use App\Post;
 
 class PostController extends Controller
@@ -97,7 +98,16 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $postToEdit = Post::find($id);
+
+        if (! $this->verifyPolicy($postToEdit, 'posts.update',
+            'Você apenas pode alterar ou excluir seus próprios posts!')) {
+            return back();
+        }
+
+        return view('posts.edit', [
+            'post' => $postToEdit,
+        ]);
     }
 
     /**
@@ -109,7 +119,26 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        $postToUpdate = Post::find($id);
+        $postToUpdate->title = request('title');
+        $postToUpdate->content = request('content');
+
+        if (! $this->verifyPolicy($postToUpdate, 'posts.update',
+           'Você apenas pode alterar ou excluir seus próprios posts!')) {
+            return back();
+        }
+
+        $postToUpdate->update();
+
+        session()->flash('flash-type', 'success');
+        session()->flash('flash-message', "O post <strong>{$postToUpdate->title}</strong> foi alterado com sucesso!");
+
+        return back();
     }
 
     /**
@@ -122,10 +151,8 @@ class PostController extends Controller
     {
         $postToExclude = Post::find($id);
 
-        if (Gate::denies('posts.delete', $postToExclude)) {
-            session()->flash('flash-type', 'danger');
-            session()->flash('flash-message', 'Você apenas pode alterar ou excluir seus próprios posts!');
-
+        if (! $this->verifyPolicy($postToExclude, 'posts.delete',
+            'Você apenas pode alterar ou excluir seus próprios posts!')) {
             return back();
         }
 
@@ -136,5 +163,15 @@ class PostController extends Controller
         session()->flash('flash-message', 'O post <strong>' . request('title') . '</strong> foi excluído com sucesso!');
 
         return back();
+    }
+
+    private function verifyPolicy(Post $post, $policyName, $errorMessage)
+    {
+        if (Gate::denies($policyName, $post)) {
+            session()->flash('flash-type', 'danger');
+            session()->flash('flash-message', $errorMessage);
+            return false;
+        }
+        return true;
     }
 }
