@@ -119,7 +119,21 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $postToUpdate = Post::find($id);
+        $postToUpdate->title = request('title');
+        $postToUpdate->content = request('content');
+
+        if (! $this->verifyPolicy($postToUpdate, 'posts.update',
+           'Você apenas pode alterar ou excluir seus próprios posts!')) {
+            return back();
+        }
+
+        $postToUpdate->update();
+
+        session()->flash('flash-type', 'success');
+        session()->flash('flash-message', "O post <strong>{$postToUpdate->title}</strong> foi alterado com sucesso!");
+
+        return back();
     }
 
     /**
