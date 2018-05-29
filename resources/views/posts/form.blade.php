@@ -1,5 +1,8 @@
 <form action="{{ $action }}" method="POST">
     {{ csrf_field() }}
+    @if(isset($method) && '' !== $method)
+    {{ method_field($method) }}
+    @endif
 
     <div class="form-group">
         <label for="title" class="control-label">
