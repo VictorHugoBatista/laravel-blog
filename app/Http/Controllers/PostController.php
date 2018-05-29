@@ -105,7 +105,9 @@ class PostController extends Controller
             return back();
         }
 
-        return view('posts.edit');
+        return view('posts.edit', [
+            'post' => $postToEdit,
+        ]);
     }
 
     /**

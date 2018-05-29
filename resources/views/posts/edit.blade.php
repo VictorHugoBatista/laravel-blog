@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-posts.edit
+@include('posts.form', ['action' => "/posts/{$post->id}", 'data' => $post])
 @endsection
