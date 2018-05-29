@@ -98,12 +98,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $postToExclude = Post::find($id);
+        $postToEdit = Post::find($id);
 
-        if (Gate::denies('posts.update', $postToExclude)) {
-            session()->flash('flash-type', 'danger');
-            session()->flash('flash-message', 'Você apenas pode alterar ou excluir seus próprios posts!');
-
+        if (! $this->verifyPolicy($postToEdit, 'posts.update',
+            'Você apenas pode alterar ou excluir seus próprios posts!')) {
             return back();
         }
 
@@ -132,10 +130,8 @@ class PostController extends Controller
     {
         $postToExclude = Post::find($id);
 
-        if (Gate::denies('posts.delete', $postToExclude)) {
-            session()->flash('flash-type', 'danger');
-            session()->flash('flash-message', 'Você apenas pode alterar ou excluir seus próprios posts!');
-
+        if (! $this->verifyPolicy($postToExclude, 'posts.delete',
+            'Você apenas pode alterar ou excluir seus próprios posts!')) {
             return back();
         }
 
@@ -146,5 +142,15 @@ class PostController extends Controller
         session()->flash('flash-message', 'O post <strong>' . request('title') . '</strong> foi excluído com sucesso!');
 
         return back();
+    }
+
+    private function verifyPolicy(Post $post, $policyName, $errorMessage)
+    {
+        if (Gate::denies($policyName, $post)) {
+            session()->flash('flash-type', 'danger');
+            session()->flash('flash-message', $errorMessage);
+            return false;
+        }
+        return true;
     }
 }
