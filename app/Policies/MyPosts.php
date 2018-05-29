@@ -20,7 +20,7 @@ class MyPosts
     
     }
 
-    public function userCanUpdatePost($user, $post)
+    public function delete($user, $post)
     {
         return $post->user->id === $user->id;
     }

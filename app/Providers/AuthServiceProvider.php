@@ -28,6 +28,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('update-post', 'App\Policies\MyPosts@userCanUpdatePost');
+        Gate::define('posts.delete', 'App\Policies\MyPosts@delete');
     }
 }

@@ -122,7 +122,7 @@ class PostController extends Controller
     {
         $postToExclude = Post::find($id);
 
-        if (Gate::denies('update-post', $postToExclude)) {
+        if (Gate::denies('posts.delete', $postToExclude)) {
             session()->flash('flash-type', 'danger');
             session()->flash('flash-message', 'Você apenas pode alterar ou excluir seus próprios posts!');
 
