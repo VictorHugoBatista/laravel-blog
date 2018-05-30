@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
 use App\User;
 use App\Post;
+use App\Http\Requests\PostsFormRequest;
 
 class PostController extends Controller
 {
@@ -62,13 +63,8 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostsFormRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-        ]);
-
         auth()->user()->publish(new Post(request(['title', 'content'])));
         
         session()->flash('flash-type', 'success');
@@ -117,13 +113,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostsFormRequest $request, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-        ]);
-
         $postToUpdate = Post::find($id);
         $postToUpdate->title = request('title');
         $postToUpdate->content = request('content');
