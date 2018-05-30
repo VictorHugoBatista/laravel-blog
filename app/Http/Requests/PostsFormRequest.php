@@ -28,4 +28,18 @@ class PostsFormRequest extends FormRequest
             'content' => 'required',
         ];
     }
+
+    /**
+     * Menssagens customizadas de validação, exibidas
+     * no front dos forms.
+     * 
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Por favor, digite o título do post',
+            'content.required' => 'Pos favor, digite o corpo do post',
+        ];
+    }
 }
